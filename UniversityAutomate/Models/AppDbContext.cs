@@ -18,5 +18,24 @@ namespace UniversityAutomate.Models
                 .AddJsonFile("appsettings.json")
                 .Build();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<City>()
+            .HasIndex(p => p.CityName)
+            .IsUnique(true);
+
+            modelBuilder.Entity<University>()
+            .HasIndex(p => p.UniversityName)
+            .IsUnique(true);
+
+            modelBuilder.Entity<Group>()
+            .HasIndex(p => new {p.GroupName, p.UniversityID})
+            .IsUnique(true);
+
+            modelBuilder.Entity<Student>()
+            .HasIndex(p => p.StudentName)
+            .IsUnique(true);
+        }
     }
 }

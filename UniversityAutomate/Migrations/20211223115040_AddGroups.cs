@@ -25,13 +25,14 @@ namespace UniversityAutomate.Migrations
                         column: x => x.UniversityID,
                         principalTable: "Universities",
                         principalColumn: "UniversityID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Groups_UniversityID",
                 table: "Groups",
                 column: "UniversityID");
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

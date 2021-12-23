@@ -35,7 +35,7 @@ namespace UniversityAutomate.Migrations
                         column: x => x.GroupID,
                         principalTable: "Groups",
                         principalColumn: "GroupID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

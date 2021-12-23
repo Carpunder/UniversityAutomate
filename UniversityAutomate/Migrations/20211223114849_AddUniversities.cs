@@ -26,7 +26,7 @@ namespace UniversityAutomate.Migrations
                         column: x => x.CityID,
                         principalTable: "Cities",
                         principalColumn: "CityID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
