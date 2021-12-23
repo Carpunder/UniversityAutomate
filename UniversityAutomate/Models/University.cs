@@ -8,5 +8,7 @@
 
         public int CityID { get; set; }
         public City City { get; set; }
+
+        public List<Group> Groups { get; set; }
     }
 }
