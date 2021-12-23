@@ -7,6 +7,7 @@ namespace UniversityAutomate.Models
         public DbSet<City> Cities { get; set; }
         public DbSet<University> Universities { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<Student> Students { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

@@ -7,5 +7,7 @@
 
         public int UniversityID { get; set; }
         public University University { get; set; }
+
+        public List<Student> Students { get; set; }
     }
 }
