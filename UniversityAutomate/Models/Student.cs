@@ -1,4 +1,6 @@
-﻿namespace UniversityAutomate.Models
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace UniversityAutomate.Models
 {
     public class Student
     {
@@ -9,9 +11,11 @@
         public double? Bonus { get; set; }
 
         public int? CityID { get; set; }
+        [ValidateNever]
         public City City { get; set; }
 
         public int GroupID { get; set; }
+        [ValidateNever]
         public Group Group { get; set; }
     }
 }
