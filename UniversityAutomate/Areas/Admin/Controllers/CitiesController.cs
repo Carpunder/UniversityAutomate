@@ -11,6 +11,7 @@ using UniversityAutomate.Areas.Admin.Models;
 namespace UniversityAutomate.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/[controller]/[action]")]
     public class CitiesController : Controller
     {
         private readonly AppDbContext _context;
@@ -21,21 +22,23 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Cities
+        //[Route("Admin/[controller]")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Cities.ToListAsync());
         }
 
         // GET: Cities/Details/5
-        public async Task<IActionResult> Details(int? id)
+        //[Route("/{cityId}")]
+        public async Task<IActionResult> Details(int? cityId)
         {
-            if (id == null)
+            if (cityId == null)
             {
                 return NotFound();
             }
 
             var city = await _context.Cities
-                .FirstOrDefaultAsync(m => m.CityID == id);
+                .FirstOrDefaultAsync(m => m.CityID == cityId);
             if (city == null)
             {
                 return NotFound();
@@ -45,6 +48,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Cities/Create
+        //[Route("Admin/[controller]/Create")]
         public IActionResult Create()
         {
             return View();
@@ -53,6 +57,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // POST: Cities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[Route("Admin/[controller]/Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CityName,Population")] City city)
@@ -67,14 +72,15 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Cities/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        //[Route("Admin/[controller]/{cityId}/Edit")]
+        public async Task<IActionResult> Edit(int? cityId)
         {
-            if (id == null)
+            if (cityId == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.Cities.FindAsync(id);
+            var city = await _context.Cities.FindAsync(cityId);
             if (city == null)
             {
                 return NotFound();
@@ -85,11 +91,12 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // POST: Cities/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[Route("Admin/[controller]/{cityId}/Edit")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CityID,CityName,Population")] City city)
+        public async Task<IActionResult> Edit(int cityId, [Bind("CityID,CityName,Population")] City city)
         {
-            if (id != city.CityID)
+            if (cityId != city.CityID)
             {
                 return NotFound();
             }
@@ -118,15 +125,16 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Cities/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        //[Route("Admin/[controller]/{cityId}/Delete")]
+        public async Task<IActionResult> Delete(int? cityId)
         {
-            if (id == null)
+            if (cityId == null)
             {
                 return NotFound();
             }
 
             var city = await _context.Cities
-                .FirstOrDefaultAsync(m => m.CityID == id);
+                .FirstOrDefaultAsync(m => m.CityID == cityId);
             if (city == null)
             {
                 return NotFound();
@@ -136,19 +144,20 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // POST: Cities/Delete/5
+        //[Route("Admin/[controller]/{cityId}/Delete")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int cityId)
         {
-            var city = await _context.Cities.FindAsync(id);
+            var city = await _context.Cities.FindAsync(cityId);
             _context.Cities.Remove(city);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CityExists(int id)
+        private bool CityExists(int cityId)
         {
-            return _context.Cities.Any(e => e.CityID == id);
+            return _context.Cities.Any(e => e.CityID == cityId);
         }
     }
 }
