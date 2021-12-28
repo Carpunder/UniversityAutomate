@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using UniversityAutomate.Models;
+using UniversityAutomate;
 using UniversityAutomate.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
 
 builder.Services.AddMvc();
@@ -28,6 +28,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Cities}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
