@@ -1,8 +1,56 @@
 ﻿@{
-    ViewData["Title"] = "Title";
+    ViewData["Title"] = "Admin";
+    var rand = new Random();
+    //<img src="https://loremflickr.com/300/200?random=@rand.Next()" class="card-img-top" alt="...">
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="card-group row-cols-4">
+    <div class="col">
+        <div class="card m-3">
+            <img src="https://loremflickr.com/300/200?random=@rand.Next()" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Cities</h5>
+                <p class="card-text">Просмотр, изменение, удаление городов</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary" asp-area="Admin" asp-controller="Cities" asp-action="Index">Cities</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card m-3">
+            <img src="https://loremflickr.com/300/200?random=@rand.Next()" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Universities</h5>
+                <p class="card-text">Просмотр, изменение, удаление городов</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary" asp-area="Admin" asp-controller="Universities" asp-action="Index">Universities</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card m-3">
+            <img src="https://loremflickr.com/300/200?random=@rand.Next()" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Groups</h5>
+                <p class="card-text">Просмотр, изменение, удаление городов</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary" asp-area="Admin" asp-controller="Groups" asp-action="Index">Groups</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card m-3">
+            <img src="https://loremflickr.com/300/200?random=@rand.Next()" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Students</h5>
+                <p class="card-text">Просмотр, изменение, удаление городов</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary" asp-area="Admin" asp-controller="Students" asp-action="Index">Students</a>
+            </div>
+        </div>
+    </div>
 </div>
