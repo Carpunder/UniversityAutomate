@@ -50,7 +50,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // GET: Groups/Create
         public IActionResult Create()
         {
-            ViewData["UniversityID"] = new SelectList(_context.Universities, "UniversityID", "UniversityID");
+            ViewData["UniversityID"] = new SelectList(_context.Universities, "UniversityID", "UniversityName");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UniversityID"] = new SelectList(_context.Universities, "UniversityID", "UniversityID", group.UniversityID);
+            ViewData["UniversityID"] = new SelectList(_context.Universities, "UniversityID", "UniversityName", group.UniversityID);
             return View(group);
         }
 
@@ -84,7 +84,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["UniversityID"] = new SelectList(_context.Universities, "UniversityID", "UniversityID", group.UniversityID);
+            ViewData["UniversityID"] = new SelectList(_context.Universities, "UniversityID", "UniversityName", group.UniversityID);
             return View(group);
         }
 
@@ -120,7 +120,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UniversityID"] = new SelectList(_context.Universities, "UniversityID", "UniversityID", group.UniversityID);
+            ViewData["UniversityID"] = new SelectList(_context.Universities, "UniversityID", "UniversityName", group.UniversityID);
             return View(group);
         }
 

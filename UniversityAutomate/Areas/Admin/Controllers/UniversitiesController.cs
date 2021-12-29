@@ -50,7 +50,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // GET: Universities/Create
         public IActionResult Create()
         {
-            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityID");
+            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityName");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityID", university.CityID);
+            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityName", university.CityID);
             return View(university);
         }
 
@@ -84,7 +84,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityID", university.CityID);
+            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityName", university.CityID);
             return View(university);
         }
 
@@ -120,7 +120,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityID", university.CityID);
+            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityName", university.CityID);
             return View(university);
         }
 
