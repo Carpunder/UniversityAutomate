@@ -11,6 +11,7 @@ using UniversityAutomate.Areas.Admin.Models;
 namespace UniversityAutomate.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/[controller]/[action]")]
     public class GroupsController : Controller
     {
         private readonly AppDbContext _context;
@@ -28,16 +29,16 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Groups/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? groupId)
         {
-            if (id == null)
+            if (groupId == null)
             {
                 return NotFound();
             }
 
             var group = await _context.Groups
                 .Include(x => x.University)
-                .FirstOrDefaultAsync(m => m.GroupID == id);
+                .FirstOrDefaultAsync(m => m.GroupID == groupId);
             if (group == null)
             {
                 return NotFound();
@@ -71,14 +72,14 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Groups/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? groupId)
         {
-            if (id == null)
+            if (groupId == null)
             {
                 return NotFound();
             }
 
-            var group = await _context.Groups.FindAsync(id);
+            var group = await _context.Groups.FindAsync(groupId);
             if (group == null)
             {
                 return NotFound();
@@ -92,9 +93,9 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GroupID,GroupName,UniversityID")] Group group)
+        public async Task<IActionResult> Edit(int groupId, [Bind("GroupID,GroupName,UniversityID")] Group group)
         {
-            if (id != group.GroupID)
+            if (groupId != group.GroupID)
             {
                 return NotFound();
             }
@@ -124,16 +125,16 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Groups/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? groupId)
         {
-            if (id == null)
+            if (groupId == null)
             {
                 return NotFound();
             }
 
             var group = await _context.Groups
                 .Include(x => x.University)
-                .FirstOrDefaultAsync(m => m.GroupID == id);
+                .FirstOrDefaultAsync(m => m.GroupID == groupId);
             if (group == null)
             {
                 return NotFound();
@@ -145,17 +146,17 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // POST: Groups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int groupId)
         {
-            var group = await _context.Groups.FindAsync(id);
+            var group = await _context.Groups.FindAsync(groupId);
             _context.Groups.Remove(group);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GroupExists(int id)
+        private bool GroupExists(int groupId)
         {
-            return _context.Groups.Any(e => e.GroupID == id);
+            return _context.Groups.Any(e => e.GroupID == groupId);
         }
     }
 }
