@@ -9,6 +9,7 @@ namespace UniversityAutomate.Areas.Admin.Models
         [Display(Name = "ФИО")]
         public string StudentName { get; set; }
         [Display(Name = "День рождения")]
+        [DataType(DataType.Date)]
         public DateTime Birthday { get; set; }
         [Display(Name = "Заработная плата")]
         public double Bursary { get; set; }

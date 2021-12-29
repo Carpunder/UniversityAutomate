@@ -16,7 +16,7 @@ namespace UniversityAutomate.Migrations
                     StudentID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Birthday = table.Column<DateOnly>(type: "date", nullable: false),
                     Bursary = table.Column<double>(type: "float", nullable: false),
                     Bonus = table.Column<double>(type: "float", nullable: true),
                     CityID = table.Column<int>(type: "int", nullable: true),
