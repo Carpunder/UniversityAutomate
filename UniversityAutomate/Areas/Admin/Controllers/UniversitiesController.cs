@@ -11,6 +11,7 @@ using UniversityAutomate.Areas.Admin.Models;
 namespace UniversityAutomate.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/[controller]/[action]")]
     public class UniversitiesController : Controller
     {
         private readonly AppDbContext _context;
@@ -28,16 +29,16 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Universities/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? universityId)
         {
-            if (id == null)
+            if (universityId == null)
             {
                 return NotFound();
             }
 
             var university = await _context.Universities
                 .Include(u => u.City)
-                .FirstOrDefaultAsync(m => m.UniversityID == id);
+                .FirstOrDefaultAsync(m => m.UniversityID == universityId);
             if (university == null)
             {
                 return NotFound();
@@ -71,14 +72,14 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Universities/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? universityId)
         {
-            if (id == null)
+            if (universityId == null)
             {
                 return NotFound();
             }
 
-            var university = await _context.Universities.FindAsync(id);
+            var university = await _context.Universities.FindAsync(universityId);
             if (university == null)
             {
                 return NotFound();
@@ -92,9 +93,9 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UniversityID,UniversityName,Address,CityID")] University university)
+        public async Task<IActionResult> Edit(int universityId, [Bind("UniversityID,UniversityName,Address,CityID")] University university)
         {
-            if (id != university.UniversityID)
+            if (universityId != university.UniversityID)
             {
                 return NotFound();
             }
@@ -124,16 +125,16 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Universities/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? universityId)
         {
-            if (id == null)
+            if (universityId == null)
             {
                 return NotFound();
             }
 
             var university = await _context.Universities
                 .Include(u => u.City)
-                .FirstOrDefaultAsync(m => m.UniversityID == id);
+                .FirstOrDefaultAsync(m => m.UniversityID == universityId);
             if (university == null)
             {
                 return NotFound();
@@ -145,17 +146,17 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // POST: Universities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int universityId)
         {
-            var university = await _context.Universities.FindAsync(id);
+            var university = await _context.Universities.FindAsync(universityId);
             _context.Universities.Remove(university);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UniversityExists(int id)
+        private bool UniversityExists(int universityId)
         {
-            return _context.Universities.Any(e => e.UniversityID == id);
+            return _context.Universities.Any(e => e.UniversityID == universityId);
         }
     }
 }

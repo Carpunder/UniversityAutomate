@@ -34,10 +34,19 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapAreaControllerRoute(
-    name: "areas",
+    name: "cities",
     areaName: "Admin",
     pattern: "{area:exists}/{controller=Admin}/{action=Index}/{cityId?}");
 
+app.MapAreaControllerRoute(
+    name: "universities",
+    areaName: "Admin",
+    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{universityId?}");
+
+app.MapAreaControllerRoute(
+    name: "groups",
+    areaName: "Admin",
+    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{groupId?}");
 
 
 app.Run();
