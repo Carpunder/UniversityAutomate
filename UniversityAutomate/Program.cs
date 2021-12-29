@@ -1,12 +1,22 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using UniversityAutomate;
 using UniversityAutomate.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AllowNullCollections = true;
+    mc.AddProfile(new MappingProfile());
+});
+
+IMapper mapper = mappingConfig.CreateMapper();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
+builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer("Server=LXIBY1093\\SQLEXPRESS;Database=UniversityDb;Trusted_Connection=True;"));
+builder.Services.AddSingleton(mapper);
 
 builder.Services.AddMvc();
 
@@ -37,7 +47,7 @@ app.MapControllerRoute(
 app.MapAreaControllerRoute(
     name: "cities",
     areaName: "Admin",
-    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{cityId?}/{search?}");
+    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{cityId?}");
 
 app.MapAreaControllerRoute(
     name: "universities",
