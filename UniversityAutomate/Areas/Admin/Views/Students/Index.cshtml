@@ -55,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.Group.GroupID)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.StudentID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.StudentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.StudentID">Delete</a>
+                <a asp-action="Edit" asp-route-studentId="@item.StudentID">Edit</a> |
+                <a asp-action="Details" asp-route-studentId="@item.StudentID">Details</a> |
+                <a asp-action="Delete" asp-route-studentId="@item.StudentID">Delete</a>
             </td>
         </tr>
 }

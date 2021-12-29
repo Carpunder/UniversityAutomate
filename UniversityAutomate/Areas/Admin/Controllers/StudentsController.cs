@@ -11,6 +11,7 @@ using UniversityAutomate.Areas.Admin.Models;
 namespace UniversityAutomate.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("Admin/[controller]/[action]")]
     public class StudentsController : Controller
     {
         private readonly AppDbContext _context;
@@ -28,9 +29,9 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         }
 
         // GET: Students/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? studentId)
         {
-            if (id == null)
+            if (studentId == null)
             {
                 return NotFound();
             }
@@ -38,7 +39,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
             var student = await _context.Students
                 .Include(s => s.City)
                 .Include(s => s.Group)
-                .FirstOrDefaultAsync(m => m.StudentID == id);
+                .FirstOrDefaultAsync(m => m.StudentID == studentId);
             if (student == null)
             {
                 return NotFound();
@@ -50,8 +51,8 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // GET: Students/Create
         public IActionResult Create()
         {
-            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityID");
-            ViewData["GroupID"] = new SelectList(_context.Groups, "GroupID", "GroupID");
+            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityName");
+            ViewData["GroupID"] = new SelectList(_context.Groups, "GroupID", "GroupName");
             return View();
         }
 
@@ -68,26 +69,26 @@ namespace UniversityAutomate.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityID", student.CityID);
-            ViewData["GroupID"] = new SelectList(_context.Groups, "GroupID", "GroupID", student.GroupID);
+            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityName", student.CityID);
+            ViewData["GroupID"] = new SelectList(_context.Groups, "GroupID", "GroupName", student.GroupID);
             return View(student);
         }
 
         // GET: Students/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? studentId)
         {
-            if (id == null)
+            if (studentId == null)
             {
                 return NotFound();
             }
 
-            var student = await _context.Students.FindAsync(id);
+            var student = await _context.Students.FindAsync(studentId);
             if (student == null)
             {
                 return NotFound();
             }
-            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityID", student.CityID);
-            ViewData["GroupID"] = new SelectList(_context.Groups, "GroupID", "GroupID", student.GroupID);
+            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityName", student.CityID);
+            ViewData["GroupID"] = new SelectList(_context.Groups, "GroupID", "GroupName", student.GroupID);
             return View(student);
         }
 
@@ -96,9 +97,9 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudentID,StudentName,Birthday,Bursary,Bonus,CityID,GroupID")] Student student)
+        public async Task<IActionResult> Edit(int studentId, [Bind("StudentID,StudentName,Birthday,Bursary,Bonus,CityID,GroupID")] Student student)
         {
-            if (id != student.StudentID)
+            if (studentId != student.StudentID)
             {
                 return NotFound();
             }
@@ -123,15 +124,15 @@ namespace UniversityAutomate.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityID", student.CityID);
-            ViewData["GroupID"] = new SelectList(_context.Groups, "GroupID", "GroupID", student.GroupID);
+            ViewData["CityID"] = new SelectList(_context.Cities, "CityID", "CityName", student.CityID);
+            ViewData["GroupID"] = new SelectList(_context.Groups, "GroupID", "GroupName", student.GroupID);
             return View(student);
         }
 
         // GET: Students/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? studentId)
         {
-            if (id == null)
+            if (studentId == null)
             {
                 return NotFound();
             }
@@ -139,7 +140,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
             var student = await _context.Students
                 .Include(s => s.City)
                 .Include(s => s.Group)
-                .FirstOrDefaultAsync(m => m.StudentID == id);
+                .FirstOrDefaultAsync(m => m.StudentID == studentId);
             if (student == null)
             {
                 return NotFound();
@@ -151,17 +152,17 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int studentId)
         {
-            var student = await _context.Students.FindAsync(id);
+            var student = await _context.Students.FindAsync(studentId);
             _context.Students.Remove(student);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(int id)
+        private bool StudentExists(int studentId)
         {
-            return _context.Students.Any(e => e.StudentID == id);
+            return _context.Students.Any(e => e.StudentID == studentId);
         }
     }
 }
