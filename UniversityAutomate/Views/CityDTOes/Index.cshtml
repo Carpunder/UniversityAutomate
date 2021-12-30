@@ -1,0 +1,48 @@
+﻿@model IEnumerable<UniversityAutomate.Models.CityDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.CityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Population)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Universities)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-cityName="@item.CityName">Details</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Population)
+            </td>
+            <td>
+                @foreach (var university in item.Universities)
+                {
+                    <a class="dropdown-item" asp-controller="UniversityDTOes" asp-action="Details"
+                    asp-route-cityName="@item.CityName" asp-route-universityName="@university.UniversityName">
+                        @Html.DisplayFor(modelItem => university.UniversityName)
+                    </a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

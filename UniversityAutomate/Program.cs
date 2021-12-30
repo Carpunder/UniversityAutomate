@@ -43,24 +43,31 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "city",
+    pattern: "{controller=Home}/{action=Index}/{cityName}");
+
+app.MapControllerRoute(
+    name: "group",
+    pattern: "{controller=Home}/{action=Index}/{cityName}");
 
 app.MapAreaControllerRoute(
-    name: "cities",
+    name: "adminCities",
     areaName: "Admin",
     pattern: "{area:exists}/{controller=Admin}/{action=Index}/{cityId?}");
 
 app.MapAreaControllerRoute(
-    name: "universities",
+    name: "adminUniversities",
     areaName: "Admin",
     pattern: "{area:exists}/{controller=Admin}/{action=Index}/{universityId?}");
 
 app.MapAreaControllerRoute(
-    name: "groups",
+    name: "adminGroups",
     areaName: "Admin",
     pattern: "{area:exists}/{controller=Admin}/{action=Index}/{groupId?}");
 
 app.MapAreaControllerRoute(
-    name: "students",
+    name: "adminStudents",
     areaName: "Admin",
     pattern: "{area:exists}/{controller=Admin}/{action=Index}/{studentId?}");
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
+using UniversityAutomate.Areas.Admin.Models;
 
 namespace UniversityAutomate.Models
 {
@@ -15,6 +16,6 @@ namespace UniversityAutomate.Models
 
         [ValidateNever]
         [Display(Name = "Группы")]
-        public List<GroupDTO> Groups { get; set; }
+        public List<Group> Groups { get; set; }
     }
 }

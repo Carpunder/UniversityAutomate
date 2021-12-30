@@ -1,0 +1,52 @@
+﻿
+@model IEnumerable<UniversityAutomate.Models.UniversityDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UniversityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Groups)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UniversityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityName)
+            </td>
+            <td>
+                @foreach (var group in item.Groups)
+                {
+                    <a class="dropdown-item" asp-controller="" asp-action="" asp-route-cityName="">
+                        @Html.DisplayFor(modelItem => group.GroupName)</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,51 @@
+﻿@model UniversityAutomate.Models.UniversityDTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>University</h4>
+    <hr />
+    <div class ="row d-flex">
+        <div class ="col">
+    <dl class="row">
+        <dt>
+            @Html.DisplayNameFor(model => model.UniversityName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UniversityName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+    </dl>
+    </div>
+
+            <div class ="col">
+    <dl class="row">
+        <dt>
+            @Html.DisplayNameFor(model => model.Groups)
+        </dt>
+        <dd>
+            <ul class="list-group">
+            @foreach (var group in Model.Groups)
+            {
+                <li class="list-group-item"><a class="dropdown-item">@Html.DisplayFor(modelItem => group.GroupName)</a></li>
+            }
+            </ul>
+        </dd>
+
+    </dl>
+    </div>
+
+    </div>
+</div>
+<div>
+    <a asp-controller="CityDTOes" asp-action="Index">Back to List</a>
+</div>

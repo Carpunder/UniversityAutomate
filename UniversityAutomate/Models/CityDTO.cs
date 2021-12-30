@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
+using UniversityAutomate.Areas.Admin.Models;
 
 namespace UniversityAutomate.Models
 {
@@ -12,10 +13,10 @@ namespace UniversityAutomate.Models
 
         [ValidateNever]
         [Display(Name = "Университеты")]
-        public List<UniversityDTO> Universities { get; set; }
+        public List<University> Universities { get; set; }
 
         [ValidateNever]
         [Display(Name = "Студенты")]
-        public List<StudentDTO> Students { get; set; }
+        public List<Student> Students { get; set; }
     }
 }
