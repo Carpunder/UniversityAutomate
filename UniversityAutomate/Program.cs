@@ -14,15 +14,15 @@ var mappingConfig = new MapperConfiguration(mc =>
 IMapper mapper = mappingConfig.CreateMapper();
 
 // Add services to the container.
+builder.Configuration.Bind("Project", new Config());
+
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddSingleton(mapper);
-
+builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
 builder.Services.AddMvc();
 
 
 var app = builder.Build();
-app.Configuration.Bind("Project", new Config());
-builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
