@@ -15,7 +15,6 @@ IMapper mapper = mappingConfig.CreateMapper();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer("Server=LXIBY1093\\SQLEXPRESS;Database=UniversityDb;Trusted_Connection=True;"));
 builder.Services.AddSingleton(mapper);
 
 builder.Services.AddMvc();
@@ -23,6 +22,7 @@ builder.Services.AddMvc();
 
 var app = builder.Build();
 app.Configuration.Bind("Project", new Config());
+builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
