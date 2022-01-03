@@ -54,7 +54,11 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "group",
-    pattern: "{controller=UniversityDTOes}/{action=Index}/{groupName}");
+    pattern: "{controller=GroupDTOes}/{action=Index}/{groupName}");
+
+app.MapControllerRoute(
+    name: "student",
+    pattern: "{controller=StudentDTOes}/{action=Index}/{studentName}");
 
 app.MapAreaControllerRoute(
     name: "adminCities",

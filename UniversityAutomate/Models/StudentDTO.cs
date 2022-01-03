@@ -6,6 +6,10 @@ namespace UniversityAutomate.Models
     public class StudentDTO
     {
         [ValidateNever]
+        [Display(Name = "Университет")]
+        public string UniversityName { get; set; }
+        
+        [ValidateNever]
         [Display(Name = "Группа")]
         public string GroupName { get; set; }
         [Display(Name = "ФИО")]

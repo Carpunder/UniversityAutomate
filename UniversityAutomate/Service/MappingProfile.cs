@@ -18,7 +18,8 @@ namespace UniversityAutomate.Service
 
             CreateMap<Student, StudentDTO>()
                 .ForMember(dest => dest.CityName, act => act.MapFrom(src => src.City.CityName))
-                .ForMember(dest => dest.GroupName, act => act.MapFrom(src => src.Group.GroupName));
+                .ForMember(dest => dest.GroupName, act => act.MapFrom(src => src.Group.GroupName))
+                .ForMember(dest => dest.UniversityName, act => act.MapFrom(src => src.Group.University.UniversityName));
         }
     }
 }

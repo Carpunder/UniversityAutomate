@@ -36,7 +36,7 @@
             <ul class="list-group">
             @foreach (var student in Model.Students)
             {
-                <a class="list-group-item" asp-controller="" asp-action="Details"
+                <a class="list-group-item" asp-controller="StudentDTOes" asp-action="Details"
                    asp-route-universityName="@Model.UniversityName"
                    asp-route-groupName="@Model.GroupName"
                    asp-route-studentName="@student.StudentName">

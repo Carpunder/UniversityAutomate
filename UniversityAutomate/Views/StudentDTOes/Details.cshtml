@@ -1,0 +1,61 @@
+@model StudentDTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <div class="row-sm-2">
+        <dl class="col">
+            <dt>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.StudentName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Birthday)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Bursary)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Bursary)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Bonus)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Bonus)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CityName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CityName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UniversityName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UniversityName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.GroupName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.GroupName)
+            </dd>            
+        </dl>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
