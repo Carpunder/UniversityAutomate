@@ -19,6 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Universities)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -34,13 +37,28 @@
                 @Html.DisplayFor(modelItem => item.Population)
             </td>
             <td>
+            <ul class="list-group">
                 @foreach (var university in item.Universities)
                 {
+                    <li class="list-group-item">
                     <a class="dropdown-item" asp-controller="UniversityDTOes" asp-action="Details"
                     asp-route-cityName="@item.CityName" asp-route-universityName="@university.UniversityName">
                         @Html.DisplayFor(modelItem => university.UniversityName)
-                    </a>
+                    </a></li>
                 }
+            </ul>
+            </td>
+            <td>
+            <ul class="list-group">
+                @foreach (var student in item.Students)
+                {
+                    <li class="list-group-item">
+                    <a class="dropdown-item" asp-controller="UniversityDTOes" asp-action="Details"
+                    asp-route-cityName="@item.CityName">
+                        @Html.DisplayFor(modelItem => student.StudentName)
+                    </a></li>
+                }
+                </ul>
             </td>
         </tr>
 }

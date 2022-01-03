@@ -24,6 +24,18 @@ namespace UniversityAutomate.Controllers
             _mapper = mapper;
         }
 
+        [Route("University/")]
+        public async Task<IActionResult> Index()
+        {
+            var universities = await _context.Universities.Include(g => g.Groups).Include(c => c.City).ToListAsync();
+            if (!universities.Any())
+            {
+                return NotFound();
+            }
+            var universitiesDTO = _mapper.Map<IEnumerable<University>, IEnumerable<UniversityDTO>>(universities);
+            return View(universitiesDTO);
+        }
+
         // GET: UniversityDTOes
         [Route("City/{cityName}/University/")]
         public async Task<IActionResult> Index(string cityName)

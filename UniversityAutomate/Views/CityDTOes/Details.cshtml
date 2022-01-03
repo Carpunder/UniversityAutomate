@@ -34,10 +34,14 @@
             @Html.DisplayNameFor(model => model.Universities)
         </dt>
         <dd>
-            <ul class="list-group">
+            <ul class="list-group mt-1">
             @foreach (var university in Model.Universities)
             {
-                <li class="list-group-item">@Html.DisplayFor(modelItem => university.UniversityName)</li>
+                <li class="list-group-item">
+                    <a class="dropdown-item" asp-controller="UniversityDTOes" asp-action="Details"
+                    asp-route-cityName="@Model.CityName" asp-route-universityName="@university.UniversityName">
+                        @Html.DisplayFor(modelItem => university.UniversityName)
+                </a></li>
             }
             </ul>
         </dd>
@@ -51,9 +55,13 @@
         </dt>
         <dd>
             <ul class="list-group">
-            @foreach (var university in Model.Students)
+            @foreach (var student in Model.Students)
             {
-                <li class="list-group-item">@Html.DisplayFor(modelItem => university.StudentName)</li>
+                <li class="list-group-item">
+                    <a class="dropdown-item" asp-controller="UniversityDTOes" asp-action="Details"
+                    asp-route-cityName="@Model.CityName" asp-route-universityName="">
+                        @Html.DisplayFor(modelItem => student.StudentName)
+                </a></li>
             }
             </ul>
         </dd>

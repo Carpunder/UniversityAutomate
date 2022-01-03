@@ -40,11 +40,14 @@
                 @Html.DisplayFor(modelItem => item.CityName)
             </td>
             <td>
+                <ul class="list-group">
                 @foreach (var group in item.Groups)
                 {
+                    <li class="list-group-item">
                     <a class="dropdown-item" asp-controller="" asp-action="" asp-route-cityName="">
-                        @Html.DisplayFor(modelItem => group.GroupName)</a>
+                        @Html.DisplayFor(modelItem => group.GroupName)</a></li>
                 }
+                </ul>
             </td>
         </tr>
 }
