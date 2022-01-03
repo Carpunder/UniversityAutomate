@@ -1,0 +1,48 @@
+@model IEnumerable<GroupDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UniversityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Students)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a asp-action="Details" asp-route-groupName="@item.GroupName" asp-route-universityName="@item.UniversityName">Details</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GroupName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UniversityName)
+        </td>
+        <td>
+            
+            <a class="list-group-item" asp-controller="" asp-action="Index"
+               asp-route-universityName="@item.UniversityName"
+               asp-route-groupName="@item.GroupName">
+                @Html.DisplayNameFor(model => model.Students)
+            </a>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>
