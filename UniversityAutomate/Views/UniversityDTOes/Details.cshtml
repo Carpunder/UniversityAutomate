@@ -36,7 +36,10 @@
             <ul class="list-group">
             @foreach (var group in Model.Groups)
             {
-                <li class="list-group-item"><a class="dropdown-item">@Html.DisplayFor(modelItem => group.GroupName)</a></li>
+                <a class="list-group-item" asp-controller="GroupDTOes" asp-action="Details"
+                   asp-route-universityName="@Model.UniversityName" asp-route-groupName="@group.GroupName">
+                    @Html.DisplayFor(modelItem => group.GroupName)
+                </a>
             }
             </ul>
         </dd>

@@ -27,7 +27,9 @@ namespace UniversityAutomate.Controllers
         [Route("University/")]
         public async Task<IActionResult> Index()
         {
-            var universities = await _context.Universities.Include(g => g.Groups).Include(c => c.City).ToListAsync();
+            var universities = await _context.Universities
+                .Include(g => g.Groups)
+                .Include(c => c.City).ToListAsync();
             if (!universities.Any())
             {
                 return NotFound();
@@ -40,7 +42,10 @@ namespace UniversityAutomate.Controllers
         [Route("City/{cityName}/University/")]
         public async Task<IActionResult> Index(string cityName)
         {
-            var universities = await _context.Universities.Include(g => g.Groups).Include(c => c.City).Where(c => c.City.CityName == cityName).ToListAsync();
+            var universities = await _context.Universities
+                .Include(g => g.Groups)
+                .Include(c => c.City)
+                .Where(c => c.City.CityName == cityName).ToListAsync();
             if (!universities.Any())
             {
                 return NotFound();
@@ -50,7 +55,7 @@ namespace UniversityAutomate.Controllers
         }
 
         // GET: UniversityDTOes/Details/5
-        [Route("City/{cityName}/{universityName}/")]
+        [Route("University/{universityName}/")]
         public async Task<IActionResult> Details(string universityName)
         {
             if (universityName == null)

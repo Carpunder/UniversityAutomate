@@ -7,49 +7,46 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UniversityName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CityName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Groups)
-            </th>
-        </tr>
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.UniversityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Groups)
+        </th>
+    </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UniversityName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CityName)
-            </td>
-            <td>
-                <ul class="list-group">
-                @foreach (var group in item.Groups)
-                {
-                    <li class="list-group-item">
-                    <a class="dropdown-item" asp-controller="" asp-action="" asp-route-cityName="">
-                        @Html.DisplayFor(modelItem => group.GroupName)</a></li>
-                }
-                </ul>
-            </td>
-        </tr>
+    <tr>
+        <td>
+            <a asp-action="Details" asp-route-universityName="@item.UniversityName">Details</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UniversityName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CityName)
+        </td>
+        <td>
+            
+            <a class="list-group-item" asp-controller="GroupDTOes" asp-action="Index" asp-route-universityName="@item.UniversityName">
+                @Html.DisplayNameFor(model => model.Groups)
+            </a>
+        </td>
+    </tr>
 }
     </tbody>
 </table>

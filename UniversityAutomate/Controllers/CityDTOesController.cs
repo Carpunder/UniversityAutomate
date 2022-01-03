@@ -28,8 +28,11 @@ namespace UniversityAutomate.Controllers
         [Route("City/")]
         public async Task<IActionResult> Index()
         {
-            var cities = await _context.Cities.Include(u => u.Universities).Include(s => s.Students).ToListAsync();
+            var cities = await _context.Cities
+                .Include(u => u.Universities)
+                .Include(s => s.Students).ToListAsync();
             var citiesDTO = _mapper.Map<IEnumerable<City>, IEnumerable<CityDTO>>(cities);
+            
             return View(citiesDTO);
         }
 
@@ -42,7 +45,9 @@ namespace UniversityAutomate.Controllers
                 return NotFound();
             }
 
-            var city = await _context.Cities.Include(u => u.Universities).Include(s => s.Students)
+            var city = await _context.Cities
+                .Include(u => u.Universities)
+                .Include(s => s.Students)
                 .FirstOrDefaultAsync(m => m.CityName == cityName);
             if (city == null)
             {
