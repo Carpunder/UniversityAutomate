@@ -14,6 +14,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
             _logger = logger;
         }
 
+        [Route("Admin/")]
         public IActionResult Index()
         {
             return View();

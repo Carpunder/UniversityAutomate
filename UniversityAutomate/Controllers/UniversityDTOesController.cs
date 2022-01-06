@@ -30,10 +30,7 @@ namespace UniversityAutomate.Controllers
             var universities = await _context.Universities
                 .Include(g => g.Groups)
                 .Include(c => c.City).ToListAsync();
-            if (!universities.Any())
-            {
-                return NotFound();
-            }
+
             var universitiesDTO = _mapper.Map<IEnumerable<University>, IEnumerable<UniversityDTO>>(universities);
             return View(universitiesDTO);
         }
@@ -46,10 +43,7 @@ namespace UniversityAutomate.Controllers
                 .Include(g => g.Groups)
                 .Include(c => c.City)
                 .Where(c => c.City.CityName == cityName).ToListAsync();
-            if (!universities.Any())
-            {
-                return NotFound();
-            }
+
             var universitiesDTO = _mapper.Map<IEnumerable<University>, IEnumerable<UniversityDTO>>(universities);
             return View(universitiesDTO);
         }
