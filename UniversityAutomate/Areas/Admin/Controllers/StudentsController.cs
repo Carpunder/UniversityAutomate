@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UniversityAutomate.Areas.Admin.Models;
+using UniversityAutomate.Areas.Admin.ViewModels;
 
 namespace UniversityAutomate.Areas.Admin.Controllers
 {
@@ -15,17 +17,22 @@ namespace UniversityAutomate.Areas.Admin.Controllers
     public class StudentsController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public StudentsController(AppDbContext context)
+        public StudentsController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Students
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Students.Include(s => s.City).Include(s => s.Group);
-            return View(await appDbContext.ToListAsync());
+            var students = _context.Students
+                .Include(g => g.Group)
+                .Include(c => c.City)
+                .Include(u => u.Group.University);
+            return View(_mapper.Map<IEnumerable<Student>, IEnumerable<StudentAdminDTO>>(students));
         }
 
         // GET: Students/Details/5
@@ -37,15 +44,16 @@ namespace UniversityAutomate.Areas.Admin.Controllers
             }
 
             var student = await _context.Students
-                .Include(s => s.City)
-                .Include(s => s.Group)
+                .Include(g => g.Group)
+                .Include(c=> c.City)
+                .Include(u => u.Group.University)
                 .FirstOrDefaultAsync(m => m.StudentID == studentId);
             if (student == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(_mapper.Map<StudentAdminDTO>(student));
         }
 
         // GET: Students/Create

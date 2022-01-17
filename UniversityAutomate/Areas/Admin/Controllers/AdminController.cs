@@ -24,7 +24,13 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         {
             return View();
         }
-
+        
+        [Route("Admin/Password/")]
+        public IActionResult Password()
+        {
+            return View();
+        }
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

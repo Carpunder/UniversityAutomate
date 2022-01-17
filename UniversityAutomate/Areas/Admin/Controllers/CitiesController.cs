@@ -1,12 +1,9 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UniversityAutomate.Areas.Admin.Models;
+using UniversityAutomate.Areas.Admin.ViewModels;
 
 namespace UniversityAutomate.Areas.Admin.Controllers
 {
@@ -15,16 +12,20 @@ namespace UniversityAutomate.Areas.Admin.Controllers
     public class CitiesController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CitiesController(AppDbContext context)
+        public CitiesController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Cities
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cities.ToListAsync());
+            var cities = _context.Cities;
+            
+            return View(_mapper.Map<IEnumerable<City>, IEnumerable<CityAdminDTO>>(cities));
         }
 
         // GET: Cities/Details/5
@@ -42,7 +43,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            return View(city);
+            return View(_mapper.Map<CityAdminDTO>(city));
         }
 
         // GET: Cities/Create
@@ -142,7 +143,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int cityId)
         {
             var city = await _context.Cities.FindAsync(cityId);
-            _context.Cities.Remove(city);
+            if (city != null) _context.Cities.Remove(city);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UniversityAutomate.Areas.Admin.Models.Group>
+﻿@model IEnumerable<UniversityAutomate.Areas.Admin.ViewModels.GroupAdminDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.GroupName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.University)
+                @Html.DisplayNameFor(model => model.UniversityName)
             </th>
             <th></th>
         </tr>
@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.GroupName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.University.UniversityID)
+                @Html.DisplayFor(modelItem => item.UniversityName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-groupId="@item.GroupID">Edit</a> |

@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UniversityAutomate.Areas.Admin.Models;
+using UniversityAutomate.Areas.Admin.ViewModels;
 
 namespace UniversityAutomate.Areas.Admin.Controllers
 {
@@ -15,17 +17,19 @@ namespace UniversityAutomate.Areas.Admin.Controllers
     public class GroupsController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public GroupsController(AppDbContext context)
+        public GroupsController(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Groups
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Groups.Include(x => x.University);
-            return View(await appDbContext.ToListAsync());
+            var groups = _context.Groups.Include(x => x.University);
+            return View(_mapper.Map<IEnumerable<Group>, IEnumerable<GroupAdminDTO>>(groups));
         }
 
         // GET: Groups/Details/5
@@ -44,7 +48,7 @@ namespace UniversityAutomate.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            return View(group);
+            return View(_mapper.Map<GroupAdminDTO>(group));
         }
 
         // GET: Groups/Create

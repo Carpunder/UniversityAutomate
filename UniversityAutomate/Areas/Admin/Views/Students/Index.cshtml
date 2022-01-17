@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UniversityAutomate.Areas.Admin.Models.Student>
+﻿@model IEnumerable<UniversityAutomate.Areas.Admin.ViewModels.StudentAdminDTO>
 
 @{
     ViewData["Title"] = "Index";
@@ -25,10 +25,13 @@
                 @Html.DisplayNameFor(model => model.Bonus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
+                @Html.DisplayNameFor(model => model.CityName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Group)
+                @Html.DisplayNameFor(model => model.UniversityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupName)
             </th>
             <th></th>
         </tr>
@@ -49,10 +52,13 @@
                 @Html.DisplayFor(modelItem => item.Bonus)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.City.CityID)
+                @Html.DisplayFor(modelItem => item.CityName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Group.GroupID)
+                @Html.DisplayFor(modelItem => item.UniversityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-studentId="@item.StudentID">Edit</a> |

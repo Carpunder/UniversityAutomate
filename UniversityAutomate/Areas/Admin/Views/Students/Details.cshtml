@@ -1,4 +1,4 @@
-﻿@model UniversityAutomate.Areas.Admin.Models.Student
+﻿@model UniversityAutomate.Areas.Admin.ViewModels.StudentAdminDTO
 
 @{
     ViewData["Title"] = "Details";
@@ -35,16 +35,22 @@
             @Html.DisplayFor(model => model.Bonus)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
+            @Html.DisplayNameFor(model => model.CityName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.City.CityID)
+            @Html.DisplayFor(model => model.CityName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UniversityName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UniversityName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Group)
+            @Html.DisplayNameFor(model => model.GroupName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Group.GroupID)
+            @Html.DisplayFor(model => model.GroupName)
         </dd>
     </dl>
 </div>
